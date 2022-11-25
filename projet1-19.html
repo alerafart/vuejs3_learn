@@ -11,29 +11,24 @@
 <!-- Objectif créer un formulaire qui envoi un bonjour avec le prenom renseigné dans une textarea-->
 <body>
     <div id="app">
-        <div><label for="nom">Entrez votre prenom</label>
-            <input type="text" name="nom" v-model="nom">
-            <button v-on:click="bonjour">cliquez ici</button>
-        </div>
-        
-        <textarea name="" id="" cols="30" rows="10"> {{message}} </textarea>
+        <label for="nom">Entrez votre prenom</label>
+        <input type="text" name="nom" v-model="nom">
+        <button v-on:click="bonjour">cliquez ici</button>
     </div>
     <script>
         app= Vue.createApp({
             data() {
                 return {
-                    message: '',
                     nom:''
                 }
             },
             methods: {
                 bonjour(nom) {
-                    this.message = 'Bonjour '+ this.nom
+                    alert('Bonjour '+ this.nom)
                 }
             }
         });
         const vm = app.mount('#app');
-        // vm.casesCoches
     </script>
 </body>
 </html>
