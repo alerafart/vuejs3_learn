@@ -10,11 +10,12 @@
 </head>
 <body>
     <div id="app">
-        <input type="checkbox" name="HTML" value="HTML" v-model="language" v-on:click="handleclick">HTML</input>
-        <input type="checkbox" name="CSS" value="CSS" v-model="language" v-on:click="handleclick">CSS</input>
-        <input type="checkbox" name="Javascript" v-model="language" value="Javascript" v-on:click="handleclick">Javascript</input>
+        <p>Cochez les langages que vous connaissez</p>
+        <input type="checkbox" name="HTML" value="HTML" v-model="language" >HTML</input>
+        <input type="checkbox" name="CSS" value="CSS" v-model="language" >CSS</input>
+        <input type="checkbox" name="Javascript" v-model="language" value="Javascript" >Javascript</input>
     <p>Cases cochés: {{language}}</p>
-
+<!-- Objectif generer un tableau contenant tous les elements checkes des imput types checkbox -->
     
     </div>
     <script>
@@ -24,17 +25,16 @@
                     language:[]
                 }
             },
-            methods: {
-                handleclick(e) {
-                    console.log(e.target.value);
-                    if(this.language.includes(e.target.value) ) {
-                        this.language.pop(e.target.value)
-                    } else {
-                        this.language.push(e.target.value)
-                    }
-
-                }
-            }
+            // methods: {
+            //     handleclick(e) {
+            //         console.log(e.target.value);
+            //         if(this.language.includes(e.target.value) ) {
+            //             this.language.pop(e.target.value)
+            //         } else {
+            //             this.language.push(e.target.value)
+            //         }
+            //     }
+            // }
         });
         const vm = app.mount('#app');
         // vm.casesCoches
