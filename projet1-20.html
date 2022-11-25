@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projet1-19</title>
+    <title>projet1-20</title>
     <script src="https://unpkg.com/vue@next"></script>
 
 </head>
-<!-- Objectif créer un formulaire qui envoi une alerte avec le prenom renseigné dans une textarea-->
+<!-- Objectif créer un formulaire qui envoi une alerte hello ou bonjour +  le prenom renseigné
+selon le button cliqué.
+Le param bonjour ou hello dois etre passée en argument de la fonction handler du click-->
 <body>
     <div id="app">
         <label for="nom">Entrez votre prenom</label>
         <input type="text" name="nom" v-model="nom">
-        <button v-on:click="bonjour">cliquez ici</button>
+        <button @click="greeting" value="bonjour">Dits bonjour</button>
+        <button @click="greeting" value="hello">Dits hello</button>
     </div>
     <script>
         app= Vue.createApp({
@@ -23,8 +26,8 @@
                 }
             },
             methods: {
-                bonjour(nom) {
-                    alert('Bonjour '+ this.nom)
+                greeting(e) {
+                    alert( e.target.value +' ' + this.nom)
                 }
             }
         });
