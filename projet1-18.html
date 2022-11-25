@@ -10,22 +10,22 @@
 </head>
 <body>
     <div id="app">
-        <p>Quel langage preferez vous ?</p>
-
-            <input type="radio" value="javascript" v-model="language">javascript</input>
-            <input type="radio" value="php" v-model="language">php</input>
-            <input type="radio" value="css" v-model="language">css</input>
-
+        <p>Nombre de clicks {{ counter }}</p>
+            <button v-on:click="increment">Incrementer le compteur</button>
         
-    <p>Langage preferé: {{language}}</p>
-<!-- Objectif afficher langage preferé selectionné -->
+<!-- Objectif créer un compteur -->
     
     </div>
     <script>
         app= Vue.createApp({
             data() {
                 return {
-                    language:''
+                    counter:0
+                }
+            },
+            methods: {
+                increment() {
+                    this.counter+=1
                 }
             }
         });
