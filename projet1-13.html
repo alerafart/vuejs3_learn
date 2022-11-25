@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet1-13</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+    <div id="app">
+        <p>vous avez choisi {{ ville }}</p>
+        <select type="select"  placeholder="choisir ville" v-model="ville" >
+            <option value="madrid" default>madrid</option>
+            <option value="paris">paris</option>
+            <option value="santiago">santiago</option>
+        </select>
+    </div>
+    <script>
+        app= Vue.createApp({
+            data() {
+                return {
+                    ville: ''
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>

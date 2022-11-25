@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet1-16</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+    <div id="app">
+        <input type="checkbox" name="HTML" value="HTML" v-model="language" v-on:click="handleclick">HTML</input>
+        <input type="checkbox" name="CSS" value="CSS" v-model="language" v-on:click="handleclick">CSS</input>
+        <input type="checkbox" name="Javascript" v-model="language" value="Javascript" v-on:click="handleclick">Javascript</input>
+    <p>Cases cochés: {{language}}</p>
+
+    
+    </div>
+    <script>
+        app= Vue.createApp({
+            data() {
+                return {
+                    language:[]
+                }
+            },
+            methods: {
+                handleclick(e) {
+                    console.log(e.target.value);
+                    if(this.language.includes(e.target.value) ) {
+                        this.language.pop(e.target.value)
+                    } else {
+                        this.language.push(e.target.value)
+                    }
+
+                }
+            }
+        });
+        const vm = app.mount('#app');
+        // vm.casesCoches
+    </script>
+</body>
+</html>
