@@ -4,28 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projet1-17</title>
+    <title>projet1-18</title>
     <script src="https://unpkg.com/vue@next"></script>
 
 </head>
+<!-- Objectif créer un compteur -->
 <body>
     <div id="app">
         <p>Nombre de clicks {{ counter }}</p>
-            <button v-on:click="increment">Incrementer le compteur</button>
-        
-<!-- Objectif créer un compteur -->
-    
+        <button v-on:click="counter++">Incrementer le compteur</button>
     </div>
     <script>
         app= Vue.createApp({
             data() {
                 return {
                     counter:0
-                }
-            },
-            methods: {
-                increment() {
-                    this.counter+=1
                 }
             }
         });
