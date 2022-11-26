@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet1-24</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<!-- challenge objectif empecher le fonctionnement du click sur lien google -->
+<body>
+    <div id="app">
+        <div @keydown="actionParent">
+            <input type="text" @keydown.prevelt.stop="action($event)">
+        </div>
+        <button @click.once="action">cliquez ici</button>
+        <input type="text" @keyup.code="action">
+
+        <!-- enter tab delete  up down left page-down exemples code touches
+        .left .right .middle  modificateurs clicks button souris -->
+    </div>
+    <script>
+        app= Vue.createApp({
+            methods: {
+                action(ev) {
+                    console.log('evenement traité dans le input');
+                    ev.preventDefault();
+                    // ev.stopPropagation();
+                },
+                actionParent() {
+                    console.log('evenement traité dans le parent');
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>

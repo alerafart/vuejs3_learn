@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet1-25</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<!-- challenge objectif redimmensionner une image selon le click de button en differentes tailles -->
+<body>
+    <div id="app">
+        <img :src="url" 
+        @click.left="largeur(200)"
+        @click.right="largeur(100)" 
+        @click.middle="largeur(400)" 
+        v-bind:width="valeur">
+
+        <!-- enter tab delete  up down left page-down exemples code touches
+        .left .right .middle  modificateurs clicks button souris -->
+    </div>
+    <script>
+        app= Vue.createApp({
+            data() {
+                return {
+                    url:'https://cdn.quasar.dev/logo-v2/svg/logo.svg',
+                    valeur:300
+                }
+            },
+            methods: {
+                largeur(lar) {
+                    this.valeur = lar;
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>
