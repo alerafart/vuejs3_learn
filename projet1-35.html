@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projet1-35</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+      .rouge {
+        color: red;
+      }
+      .italique {
+        font-style: italic;
+      }
+      .bold {
+        font-weight: bold;
+      }
+      li {
+        list-style: none;
+      }
+    </style>
+  </head>
+  <!-- challenge objectif 
+appliquer a un texte 3 classes conditionelles en fonction des checkboxes de style cochées
+-->
+  <body>
+    <div id="app">
+      <p>Quels langages connaissez vous ?</p>
+      <input type="text" v-model="unLang" />
+      <input type="button" value="Valider" @click="ajouter" />
+      <ul>
+        <li v-for="item in styles">
+          <input type="checkbox" v-model="item.etatCase" />
+          <span :class="{rouge:item.etatCase}">{{item.style}}</span>
+        </li>
+      </ul>
+    </div>
+    <script>
+      app = Vue.createApp({
+        data() {
+          return {
+            styles: [
+              { style: "Gras", checked: false },
+              { style: "Italique", checked: false },
+              { style: "Souligné", checked: false }
+            ],
+          };
+        }
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
