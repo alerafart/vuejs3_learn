@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet1-28</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<!-- challenge objectif supprimer elements d un tableau ou structure grace avec v-for qui contiens 2 parametres et un button sup-->
+<body>
+    <div id="app">
+        <div v-for=" (elem, id) in elements">
+            {{elem}}
+            <button @click="sup(id)" value="supprimer">supprimer</button>
+
+        </div>
+       
+    </div>
+    <script>
+        app= Vue.createApp({
+            data() {
+                return {
+                    elements: ['premier', 'deuxieme', 'troisieme', 'quatrieme'],
+                }
+            },
+            methods: {
+                sup(i) {
+                    this.elements.splice(i,1)
+                }
+                // methode splice supprime l'element du tableu en position i, deuxieme param dits combien d'elements il supprime
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>
