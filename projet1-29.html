@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet1-29</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<!-- objectif 2 button radios simple click et double click
+selon le button clické 
+augmenter taille image avec element dynamique dans l'element evenementiel'
+aigmenter taille de 10% avec 1er button et de 20% avec 2eme button-->
+<body>
+    <div id="app">
+        <img 
+            src="./img.jpg"
+            v-bind:width="valeur"
+
+        >
+        <input type="radio" v-on:click=[plus10]>plus10</input>
+        <input  type="radio" v-on:click=[plus20]>plus20</input>
+    </div>
+    <script>
+        app= Vue.createApp({
+            data() {
+                return {
+                    valeur:300
+                }
+            },
+            methods: {
+                plus10() {
+                    this.valeur=330
+                },
+                plus20() {
+                    this.valeur=360
+                }
+                
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>
