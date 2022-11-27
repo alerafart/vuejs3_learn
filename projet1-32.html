@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projet1-32</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <!-- V-cloak pour eviter que les acolades apparaissent dans le dom 
+  Interdire l'affichage des elements q'ont un attributs v-cloak-->
+
+  <body>
+    <div id="app">
+      <div v-cloak>{{text}}</div>
+    </div>
+    <script>
+      app = Vue.createApp({
+        data() {
+          return {
+            text: "bonjour",
+          };
+        },
+        methods: {
+          maj() {
+            this.text = this.text.toUpperCase();
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
