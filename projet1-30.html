@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>projet1-30</title>
     <script src="https://unpkg.com/vue@next"></script>
-
-</head>
-<!-- parcourir tableau d'objets json en le parsant et constituel une liste des personnes dans cet objet-->
-<body>
+  </head>
+  <!-- challenge: parcourir tableau d'objets json en le parsant et constituer une liste des personnes dans cet objet-->
+  <body>
     <div id="app">
-        <ul>
-            <li v-for="person in persons"> {{person.prenom}} {{person.nom}} {{person.age}}</li>
-        </ul>
+      <ul>
+        <li v-for="person in persons">
+          {{person.prenom}} {{person.nom}} {{person.age}}
+        </li>
+      </ul>
     </div>
     <script>
-        app= Vue.createApp({
-            data() {
-                return {
-                    persons: 
-                    [
-                        {
-                            prenom: 'Pierre',
-                            nom: 'Martin',
-                            age: 24
-                        },
-                        {
-                            prenom: 'Ale',
-                            nom: 'Rafart',
-                            age: 42
-                        },
-                        {
-                            prenom: 'Lohan',
-                            nom: 'Joye',
-                            age: 12
-                        }
-                ]
-                }
-            }
-        });
-        app.mount('#app');
+      app = Vue.createApp({
+        data() {
+          return {
+            persons: [
+              {
+                prenom: "Pierre",
+                nom: "Martin",
+                age: 24,
+              },
+              {
+                prenom: "Ale",
+                nom: "Rafart",
+                age: 42,
+              },
+              {
+                prenom: "Lohan",
+                nom: "Joye",
+                age: 12,
+              },
+            ],
+          };
+        },
+      });
+      app.mount("#app");
     </script>
-</body>
+  </body>
 </html>
