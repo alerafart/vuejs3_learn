@@ -10,31 +10,31 @@
 </head>
 <!-- objectif 2 button radios simple click et double click
 selon le button clické 
-augmenter taille image avec element dynamique dans l'element evenementiel'
-aigmenter taille de 10% avec 1er button et de 20% avec 2eme button-->
+augmenter taille image en cliquant dessus avec element dynamique dans l'element evenementiel'
+augmenter taille de 10% avec 1 click sur l'image quand 1er button est selectionné et avec doucleclick avec 2eme button coché-->
 <body>
     <div id="app">
-        <img 
-            src="./img.jpg"
-            v-bind:width="valeur"
-
-        >
-        <input type="radio" v-on:click=[plus10]>plus10</input>
-        <input  type="radio" v-on:click=[plus20]>plus20</input>
+        <input type="radio" v-model="choix" value="click" checked ><label>click</label></input>
+        <input type="radio" v-model="choix" value="dblclick"><label>dblclick</label></input>
+        <p>
+            <img 
+                src="./img.jpg"
+                v-bind:width="taille"
+                @[choix]="modifierTaille"
+            >
+        </p>
     </div>
     <script>
         app= Vue.createApp({
             data() {
                 return {
-                    valeur:300
+                    choix:'click',
+                    taille:200
                 }
             },
             methods: {
-                plus10() {
-                    this.valeur=330
-                },
-                plus20() {
-                    this.valeur=360
+                modifierTaille() {
+                    this.taille = this.taille * 1.1;
                 }
                 
             }
