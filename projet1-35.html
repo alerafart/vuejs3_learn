@@ -7,13 +7,13 @@
     <title>projet1-35</title>
     <script src="https://unpkg.com/vue@next"></script>
     <style>
-      .rouge {
-        color: red;
+      .s {
+        text-decoration: underline;
       }
-      .italique {
+      .i {
         font-style: italic;
       }
-      .bold {
+      .g {
         font-weight: bold;
       }
       li {
@@ -26,27 +26,23 @@ appliquer a un texte 3 classes conditionelles en fonction des checkboxes de styl
 -->
   <body>
     <div id="app">
-      <p>Quels langages connaissez vous ?</p>
-      <input type="text" v-model="unLang" />
-      <input type="button" value="Valider" @click="ajouter" />
-      <ul>
-        <li v-for="item in styles">
-          <input type="checkbox" v-model="item.etatCase" />
-          <span :class="{rouge:item.etatCase}">{{item.style}}</span>
-        </li>
-      </ul>
+      <input type="checkbox" v-model="gras" />Gras
+      <input type="checkbox" v-model="italique" />Italique
+      <input type="checkbox" v-model="souligne" />Souligné
+      <div :class="{g:gras, i:italique, s:souligne}">
+        Un peu de texte dans le div
+      </div>
     </div>
+
     <script>
       app = Vue.createApp({
         data() {
           return {
-            styles: [
-              { style: "Gras", checked: false },
-              { style: "Italique", checked: false },
-              { style: "Souligné", checked: false }
-            ],
+            gras: false,
+            italique: false,
+            souligne: false,
           };
-        }
+        },
       });
       app.mount("#app");
     </script>
