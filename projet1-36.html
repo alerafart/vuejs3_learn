@@ -9,25 +9,25 @@
 
   </head>
   <!-- challenge objectif 
-appliquer a un texte 4 couleurs selon option choisie et 4 tailles dans une balise style inline
+appliquer a un texte 4 couleurs selon option choisie dans liste deroulante et 4 tailles dans une balise style inline
 -->
   <body>
     <div id="app">
-      <select name="couleurs" v-model="couleurs">
-        color
+      Couleur
+      <select v-model="couleur">
+        <option value="black" selected>Noir</option>
         <option value="red">Rouge</option>
         <option value="blue">Bleu</option>
-        <option value="black">Noir</option>
         <option value="cyan">Cyan</option>
       </select>
-      <select name="fontsize" v-model="fontsize">
-        taille
-        <option value="16">16 px</option>
-        <option value="25">25 px</option>
-        <option value="40">40 px</option>
-        <option value="60">60 px</option>
+      Taille
+      <select v-model="taille">
+        <option value="16px" selected>16 px</option>
+        <option value="25px">25 px</option>
+        <option value="40px">40 px</option>
+        <option value="60px">60 px</option>
       </select>
-      <div :style="{color:couleurs, 'font-size': fontsize + 'px'}">
+      <div :style="{color:couleur, fontSize: taille}">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis
         totam enim sunt quis, aperiam harum sit est illo sed porro facere magnam
         nam accusantium error fugiat facilis sequi. Tempore, magnam?
@@ -38,18 +38,8 @@ appliquer a un texte 4 couleurs selon option choisie et 4 tailles dans une balis
       app = Vue.createApp({
         data() {
           return {
-            couleurs: {
-              red: false,
-              blue: false,
-              black: false,
-              cyan: false
-            },
-            fontsize: {
-              16:false,
-              25:false,
-              40:false,
-              60:false
-            }
+            couleur: 'black',
+            taille: '16px'
           };
         },
       });
