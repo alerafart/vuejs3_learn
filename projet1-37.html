@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projet1-37</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+   
+      li {
+        list-style: none;
+      }
+    </style>
+  </head>
+  <!-- challenge objectif 
+    afficher une phrase "est coché" ou "est decoché" a coté du langage ajouté selon si le checkbox est coche ou décoché
+    v-if
+-->
+  <body>
+    <div id="app">
+      <p>Quels langages connaissez vous ?</p>
+      <input type="text" v-model="unLang" />
+      <input type="button" value="Valider" @click="ajouter" />
+      <ul>
+        <li v-for="lan in langages">
+          <input type="checkbox" v-model="lan.etatCase" />
+          <span v-if="lan.etatCase">{{lan.lang}} est coché</span>
+          <span v-if="lan.etatCase === false">{{lan.lang}} est décoché</span>
+        </li>
+      </ul>
+    </div>
+    <script>
+      app = Vue.createApp({
+        data() {
+          return {
+            unLang: "",
+            langages: [],
+          };
+        },
+        methods: {
+          ajouter() {
+            this.langages.push({
+              lang: this.unLang,
+              etatCase: false,
+            });
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
