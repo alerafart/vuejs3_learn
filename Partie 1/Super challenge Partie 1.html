@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>projet1-38</title>
     <script src="https://unpkg.com/vue@next"></script>
+    <style>
+      .card {
+        display: flex;
+        padding: 1rem;
+      }
+      .data {
+        margin-left: 1rem;
+      }
+    </style>
   </head>
   <!-- challenge objectif afficher
   -->
@@ -13,28 +22,37 @@
     <div id="app">
       <fieldset>
         Filtrer sur le nom
-        <input type="text" />
+        <input type="text" v-model="recherche" @keydown="find($event)"/>
       </fieldset>
 
       <fieldset>
         Options
-        <input type="checkbox" />
-        <input type="checkbox" />
-        <input type="checkbox" />
-
-        Photo
-        <select>
-          <option value="petit">Petit</option>
-          <option value="moyen">Moyen</option>
-          <option value="grand">Grand</option>
+        <input type="checkbox" v-model="homme" />Homme
+        <input type="checkbox" v-model="femme" />Femme
+        <input type="checkbox" v-model="telephone" />Telephone Photo
+        <select v-model="photo">
+          <option value="large" selected>Grand</option>
+          <option value="medium">Moyen</option>
+          <option value="thumbnail">Petit</option>
         </select>
 
         Mise en Forme
-        <input type="checkbox" />
+        <input type="checkbox" v-model="style" />
       </fieldset>
 
-      <div>
-        <img :src="persons[0].picture.large" alt="" />
+      <div class="card" v-for="( person,i) in persons">
+        <div>
+          <img v-if="photo==='large'" :style="{width:photo}" :src="persons[i].picture.large" alt="" />
+          <img  v-else-if="photo==='medium'" :src="persons[i].picture.medium" alt="" />
+          <img  v-else :src="persons[i].picture.thumbnail" alt="" />
+        </div>
+        <div class="data">
+          <p>
+            {{person.name.title}}. {{person.name.first}} {{person.name.last}}
+          </p>
+          <p>Telephone: {{person.phone}}</p>
+          <p>Pays {{person.location.country}}</p>
+        </div>
       </div>
     </div>
 
@@ -42,6 +60,13 @@
       app = Vue.createApp({
         data() {
           return {
+            recherche:'',
+            homme:true,
+            femme:true,
+            telephone:true,
+            pays:true,
+            photo:'large',
+            style:false,
             persons: [
               {
                 gender: "female",
@@ -222,7 +247,13 @@
           };
         },
         methods: {
-
+          find(e) {
+            // let search = e.target.value;
+            this.recherche = e.target.value;
+            // let names = this.persons.name.first;
+                // console.log(names);
+                console.log(this.recherche);
+          }
         },
       });
       app.mount("#app");
