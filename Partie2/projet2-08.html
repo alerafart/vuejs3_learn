@@ -4,26 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>projet2-04</title>
+    <title>projet2-08</title>
     <script src="https://unpkg.com/vue@next"></script>
   </head>
-  <!-- Creer compteur avec Composant Global -->
   <body>
+    <!-- composant local avec props -->
     <div id="app">
-      <Compteur />
+      <bonjour prenom="jean"></bonjour>
+      <bonjour prenom="pierre"></bonjour>
+      <bonjour prenom="emma"></bonjour>
     </div>
     <script>
+      const Bonjour = {
+        template: "<div>Bonjour {{prenom}} </div>",
+        props: ["prenom"],
+      };
       const app = Vue.createApp({
-      });
-      app.component('compteur' , {
-        data() {
-          return {
-            nombre:0
-          }
+        components: {
+          bonjour: Bonjour,
         },
-        template: '<button @click="nombre++">{{nombre}}</button>'
-      })
-      
+      });
+
       app.mount("#app");
     </script>
   </body>

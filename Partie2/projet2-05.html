@@ -7,22 +7,26 @@
     <title>projet2-04</title>
     <script src="https://unpkg.com/vue@next"></script>
   </head>
-  <!-- Creer compteur avec Composant Global -->
+  <!-- Creer compteur avec Composant local -->
   <body>
     <div id="app">
-      <Compteur />
+      <cpt-loc />
     </div>
     <script>
-      const app = Vue.createApp({
-      });
-      app.component('compteur' , {
+      const CptLocal = {
         data() {
           return {
-            nombre:0
+            nbclics:0
           }
         },
-        template: '<button @click="nombre++">{{nombre}}</button>'
-      })
+        template: '<button @click="nbclics++">{{nbclics}}</button>'
+      }
+      const app = Vue.createApp({
+        components: {
+          'cpt-loc': CptLocal
+        }
+      });
+      
       
       app.mount("#app");
     </script>
