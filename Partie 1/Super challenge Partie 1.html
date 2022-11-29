@@ -13,7 +13,7 @@
       }
       .s {
         background-color: rgb(154, 194, 194);
-        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-family: Georgia, "Times New Roman", Times, serif;
         font-size: 1.2rem;
         margin: 1rem;
       }
@@ -37,7 +37,7 @@
     <div id="app">
       <fieldset>
         <legend>Filtrer sur le nom</legend>
-        <input type="text" v-model="recherche" @keyup="find($event)" />
+        <input type="text" v-model="filtreNom" />
       </fieldset>
 
       <fieldset>
@@ -60,9 +60,18 @@
       </fieldset>
 
       <div class="cards">
-        <div v-for="(person,i) in persons" v-if="recherche===''" class="card" :class="{ s:dataStyled}">
-          <div v-if="((homme && person.name.title == 'Mr') ||
-                      (femme && person.name.title == 'Mrs'))"  >
+        <div
+          v-for="(person,i) in persons"
+          class="card"
+          :class="{ s:dataStyled}"
+        >
+          <div
+            v-if="(
+                    ((homme && person.name.title == 'Mr') ||
+                    (femme && person.name.title == 'Mrs'))
+                    && (person.name.last.indexOf(filtreNom)>=0 || filtreNom=='')
+                  )"
+          >
             <div class="img">
               <img
                 v-if="photo==='large'"
@@ -77,7 +86,7 @@
               />
               <img v-else :src="persons[i].picture.thumbnail" alt="" />
             </div>
-            <div class="data" >
+            <div class="data">
               <p>
                 {{person.name.title}}. {{person.name.first}}
                 {{person.name.last}}
@@ -90,10 +99,11 @@
 
         <div v-if="recherche" class="card" v-for="( person,i) in results">
           <div class="img">
+            <img v-if="photo==='large'" :src="results[i].picture.large" />
             <img
-              v-if="photo==='large'" :src="results[i].picture.large"/>
-            <img
-              v-else-if="photo==='medium'" :src="results[i].picture.medium"/>
+              v-else-if="photo==='medium'"
+              :src="results[i].picture.medium"
+            />
             <img v-else :src="results[i].picture.thumbnail" alt="" />
           </div>
           <div class="data">
@@ -111,7 +121,7 @@
       app = Vue.createApp({
         data() {
           return {
-            recherche: "",
+            filtreNom: '',
             homme: true,
             femme: true,
             tel: true,
@@ -297,59 +307,7 @@
               },
             ],
           };
-        },
-        computed: {
-          // find() {
-          // this.recherche = e.target.value;
-          // console.log(this.recherche);
-          // return this.persons.filter((pers)=> {
-          //   return pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())
-          // })
-          // }
-        },
-        methods: {
-          find(e) {
-            this.recherche = e.target.value;
-
-            this.results = this.persons.filter((pers) => {
-              const isDuplicate = this.recherche.includes(pers.name.last);
-
-              if (!isDuplicate) {
-                this.results.push(pers);
-              }
-            });
-            // return this.persons.filter((pers)=> {
-            //   if(pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())) {
-            //     console.log(pers);
-
-            //     this.results.push(pers);
-            //   }
-            //   // if(pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())) {
-            //   //   console.log(pers);
-            //   //     let found = this.results.includes(pers)
-            //   //   if(!found) {
-            //   //     this.results.push(pers);
-            //   //   }
-            //   // }
-            //   // return this.results;
-            //   // this.persons = this.results;
-            // })
-            // for(i=0; i<this.persons.length; i++) {
-            //   // console.log(this.persons[i].name.first)
-            //   let allLastNames = this.persons[i].name.last
-            //   this.recherche = e.target.value;
-            //   console.log(this.recherche);
-            //   if(allLastNames.includes(this.recherche)) {
-            //     // console.log(allPeople);
-            //   }
-            // }
-            // let search = e.target.value;
-            // this.recherche = e.target.value;
-            // let names = this.persons.name.first;
-            // console.log(names);
-            // console.log(this.recherche);
-          },
-        },
+        }
       });
       app.mount("#app");
     </script>
