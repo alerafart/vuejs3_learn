@@ -7,7 +7,6 @@
     <title>projet1-38</title>
     <script src="https://unpkg.com/vue@next"></script>
     <style>
-      
       .card {
         display: flex;
         padding: 1rem;
@@ -17,6 +16,7 @@
       }
       .img {
         float: left;
+        margin-right: 1rem;
       }
       .data {
         padding-left: 10rem;
@@ -29,47 +29,56 @@
   -->
   <body>
     <div id="app">
-      <fieldset><legend>Filtrer sur le nom</legend>
-        
+      <fieldset>
+        <legend>Filtrer sur le nom</legend>
         <input type="text" v-model="recherche" @keyup="find($event)" />
       </fieldset>
 
-      <fieldset> <legend>Options</legend> 
-        
-        <input type="checkbox" value="male" v-model="male" checked />Homme
-        <input type="checkbox" value="female" v-model="female" checked />Femme
-        <input type="checkbox" v-model="telephone" />Telephone 
-        <select v-model="photo">Photo
+      <fieldset>
+        <legend>Options</legend>
+        Homme<input type="checkbox" v-model="homme" checked /> Femme<input
+          type="checkbox"
+          v-model="femme"
+          checked
+        />
+        Telephone<input type="checkbox" v-model="tel" />
+        Photo
+        <select v-model="photo">
           <option value="large" selected>Grand</option>
           <option value="medium">Moyen</option>
           <option value="thumbnail">Petit</option>
         </select>
 
         Mise en Forme
-        <input type="checkbox" v-model="dataStyled" value="s"/>
+        <input type="checkbox" v-model="dataStyled" value="s" />
       </fieldset>
+
       <div class="cards">
-        <div v-if="recherche===''" class="card" v-for="( person,i) in persons">
-          <div class="img">
-            <img
-              v-if="photo==='large'"
-              :style="{width:photo}"
-              :src="persons[i].picture.large"
-              alt=""
-            />
-            <img
-              v-else-if="photo==='medium'"
-              :src="persons[i].picture.medium"
-              alt=""
-            />
-            <img v-else :src="persons[i].picture.thumbnail" alt="" />
-          </div>
-          <div class="data" :class="{ s:dataStyled}">
-            <p>
-              {{person.name.title}}. {{person.name.first}} {{person.name.last}}
-            </p>
-            <p v-if="telephone">Telephone: {{person.phone}}</p>
-            <p>Pays {{person.location.country}}</p>
+        <div v-for="(person,i) in persons" v-if="recherche===''" class="card">
+          <div v-if="((homme && person.name.title == 'Mr') ||
+                      (femme && person.name.title == 'Mrs'))"  >
+            <div class="img">
+              <img
+                v-if="photo==='large'"
+                :style="{width:photo}"
+                :src="persons[i].picture.large"
+                alt=""
+              />
+              <img
+                v-else-if="photo==='medium'"
+                :src="persons[i].picture.medium"
+                alt=""
+              />
+              <img v-else :src="persons[i].picture.thumbnail" alt="" />
+            </div>
+            <div class="data" :class="{ s:dataStyled}">
+              <p>
+                {{person.name.title}}. {{person.name.first}}
+                {{person.name.last}}
+              </p>
+              <p v-if="tel">Telephone: {{person.phone}}</p>
+              <p>Pays {{person.location.country}}</p>
+            </div>
           </div>
         </div>
 
@@ -103,14 +112,14 @@
       app = Vue.createApp({
         data() {
           return {
-            recherche:'',
+            recherche: "",
             homme: true,
             femme: true,
-            telephone: true,
-            pays: true,
+            tel: true,
+            dataStyled: false,
             photo: "large",
-            results:[],
-            dataStyled:false,
+            results: [],
+
             persons: [
               {
                 gender: "female",
@@ -292,34 +301,40 @@
         },
         computed: {
           // find() {
-            // this.recherche = e.target.value;
-            // console.log(this.recherche);
-            // return this.persons.filter((pers)=> {
-            //   return pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())
-            // })
+          // this.recherche = e.target.value;
+          // console.log(this.recherche);
+          // return this.persons.filter((pers)=> {
+          //   return pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())
+          // })
           // }
         },
         methods: {
           find(e) {
             this.recherche = e.target.value;
-            // console.log(this.recherche);
-            // console.log(e.target.value);
-            return this.persons.filter((pers)=> {
-              if(pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())) {
-                console.log(pers);
-                
+
+            this.results = this.persons.filter((pers) => {
+              const isDuplicate = this.recherche.includes(pers.name.last);
+
+              if (!isDuplicate) {
                 this.results.push(pers);
               }
-              // if(pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())) {
-              //   console.log(pers);
-              //     let found = this.results.includes(pers)
-              //   if(!found) {
-              //     this.results.push(pers);
-              //   }
-              // }
-              // return this.results;
-              // this.persons = this.results;
-            })
+            });
+            // return this.persons.filter((pers)=> {
+            //   if(pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())) {
+            //     console.log(pers);
+
+            //     this.results.push(pers);
+            //   }
+            //   // if(pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())) {
+            //   //   console.log(pers);
+            //   //     let found = this.results.includes(pers)
+            //   //   if(!found) {
+            //   //     this.results.push(pers);
+            //   //   }
+            //   // }
+            //   // return this.results;
+            //   // this.persons = this.results;
+            // })
             // for(i=0; i<this.persons.length; i++) {
             //   // console.log(this.persons[i].name.first)
             //   let allLastNames = this.persons[i].name.last
