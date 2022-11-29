@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projet1-08</title>
+    <title>projet2-01</title>
     <script src="https://unpkg.com/vue@next"></script>
 
 </head>
+<!-- Composants locales -->
 <body>
     <div id="app">
-        <p> {{  }}</p>
+        
+        <bonjour></bonjour>
+        <bonjour></bonjour>
+        <bonjour />
     </div>
     <script>
         app= Vue.createApp({
@@ -19,12 +23,10 @@
                     
                 }
             },
-            computed: {
-                calcul() {
-                    
-                }
-            }
         });
+        app.component('bonjour', {
+            template:'<div>Bonjour</div>'
+        })
         app.mount('#app');
     </script>
 </body>
