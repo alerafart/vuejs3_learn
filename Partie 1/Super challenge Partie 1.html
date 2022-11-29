@@ -36,8 +36,8 @@
 
       <fieldset> <legend>Options</legend> 
         
-        <input type="checkbox" value="male" v-model="persons.gender" checked />Homme
-        <input type="checkbox" value="female" v-model="persons.gender" checked />Femme
+        <input type="checkbox" value="male" v-model="male" checked />Homme
+        <input type="checkbox" value="female" v-model="female" checked />Femme
         <input type="checkbox" v-model="telephone" />Telephone 
         <select v-model="photo">Photo
           <option value="large" selected>Grand</option>
@@ -68,7 +68,7 @@
             <p>
               {{person.name.title}}. {{person.name.first}} {{person.name.last}}
             </p>
-            <p v-if="phone">Telephone: {{person.phone}}</p>
+            <p v-if="telephone">Telephone: {{person.phone}}</p>
             <p>Pays {{person.location.country}}</p>
           </div>
         </div>
@@ -106,7 +106,7 @@
             recherche:'',
             homme: true,
             femme: true,
-            phone: true,
+            telephone: true,
             pays: true,
             photo: "large",
             results:[],
