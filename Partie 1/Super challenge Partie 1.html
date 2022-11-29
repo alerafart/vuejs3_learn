@@ -7,12 +7,21 @@
     <title>projet1-38</title>
     <script src="https://unpkg.com/vue@next"></script>
     <style>
+      
       .card {
         display: flex;
         padding: 1rem;
       }
+      .s {
+        background-color: aqua;
+      }
+      .img {
+        float: left;
+      }
       .data {
-        margin-left: 1rem;
+        padding-left: 10rem;
+        height: 60%;
+        width: 100vw;
       }
     </style>
   </head>
@@ -22,13 +31,13 @@
     <div id="app">
       <fieldset>
         Filtrer sur le nom
-        <input type="text" v-model="recherche" @keydown="find($event)"/>
+        <input type="text" v-model="recherche" @keyup="find($event)" />
       </fieldset>
 
       <fieldset>
         Options
-        <input type="checkbox" v-model="homme" />Homme
-        <input type="checkbox" v-model="femme" />Femme
+        <input type="checkbox" value="male" v-model="persons.gender" checked />Homme
+        <input type="checkbox" value="female" v-model="persons.gender" checked />Femme
         <input type="checkbox" v-model="telephone" />Telephone Photo
         <select v-model="photo">
           <option value="large" selected>Grand</option>
@@ -37,21 +46,55 @@
         </select>
 
         Mise en Forme
-        <input type="checkbox" v-model="style" />
+        <input type="checkbox" v-model="dataStyled" value="s"/>
       </fieldset>
-
-      <div class="card" v-for="( person,i) in persons">
-        <div>
-          <img v-if="photo==='large'" :style="{width:photo}" :src="persons[i].picture.large" alt="" />
-          <img  v-else-if="photo==='medium'" :src="persons[i].picture.medium" alt="" />
-          <img  v-else :src="persons[i].picture.thumbnail" alt="" />
+      <div class="cards">
+        <div v-if="recherche===''" class="card" v-for="( person,i) in persons">
+          <div class="img">
+            <img
+              v-if="photo==='large'"
+              :style="{width:photo}"
+              :src="persons[i].picture.large"
+              alt=""
+            />
+            <img
+              v-else-if="photo==='medium'"
+              :src="persons[i].picture.medium"
+              alt=""
+            />
+            <img v-else :src="persons[i].picture.thumbnail" alt="" />
+          </div>
+          <div class="data" :class="{s:dataStyled}">
+            <p>
+              {{person.name.title}}. {{person.name.first}} {{person.name.last}}
+            </p>
+            <p>Telephone: {{person.phone}}</p>
+            <p>Pays {{person.location.country}}</p>
+          </div>
         </div>
-        <div class="data">
-          <p>
-            {{person.name.title}}. {{person.name.first}} {{person.name.last}}
-          </p>
-          <p>Telephone: {{person.phone}}</p>
-          <p>Pays {{person.location.country}}</p>
+
+        <div v-if="recherche" class="card" v-for="( person,i) in results">
+          <div class="img">
+            <img
+              v-if="photo==='large'"
+              :style="{width:photo}"
+              :src="results[i].picture.large"
+              alt=""
+            />
+            <img
+              v-else-if="photo==='medium'"
+              :src="results[i].picture.medium"
+              alt=""
+            />
+            <img v-else :src="results[i].picture.thumbnail" alt="" />
+          </div>
+          <div class="data">
+            <p>
+              {{person.name.title}}. {{person.name.first}} {{person.name.last}}
+            </p>
+            <p>Telephone: {{person.phone}}</p>
+            <p>Pays {{person.location.country}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -61,12 +104,13 @@
         data() {
           return {
             recherche:'',
-            homme:true,
-            femme:true,
-            telephone:true,
-            pays:true,
-            photo:'large',
-            style:false,
+            homme: true,
+            femme: true,
+            telephone: true,
+            pays: true,
+            photo: "large",
+            results:[],
+            dataStyled:false,
             persons: [
               {
                 gender: "female",
@@ -246,14 +290,51 @@
             ],
           };
         },
+        computed: {
+          // find() {
+            // this.recherche = e.target.value;
+            // console.log(this.recherche);
+            // return this.persons.filter((pers)=> {
+            //   return pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())
+            // })
+          // }
+        },
         methods: {
           find(e) {
-            // let search = e.target.value;
             this.recherche = e.target.value;
+            // console.log(this.recherche);
+            // console.log(e.target.value);
+            return this.persons.filter((pers)=> {
+              if(pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())) {
+                console.log(pers);
+                
+                this.results.push(pers);
+              }
+              // if(pers.name.last.toLowerCase().includes(this.recherche.toLowerCase())) {
+              //   console.log(pers);
+              //     let found = this.results.includes(pers)
+              //   if(!found) {
+              //     this.results.push(pers);
+              //   }
+              // }
+              // return this.results;
+              // this.persons = this.results;
+            })
+            // for(i=0; i<this.persons.length; i++) {
+            //   // console.log(this.persons[i].name.first)
+            //   let allLastNames = this.persons[i].name.last
+            //   this.recherche = e.target.value;
+            //   console.log(this.recherche);
+            //   if(allLastNames.includes(this.recherche)) {
+            //     // console.log(allPeople);
+            //   }
+            // }
+            // let search = e.target.value;
+            // this.recherche = e.target.value;
             // let names = this.persons.name.first;
-                // console.log(names);
-                console.log(this.recherche);
-          }
+            // console.log(names);
+            // console.log(this.recherche);
+          },
         },
       });
       app.mount("#app");
