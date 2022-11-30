@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projet2-14</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <!-- composant global 
+    $emit 
+    lorsq le button est cliqué un evenement personalisé est cree avec $ emit
+    evenement est capture dans le composant et execute une function
+    3 Composants sont independants et la somme est affichée dans le span du parent -->
+    <div id="app">
+      <span>{{total}}</span>
+      <compteur @incremente="plusUn"></compteur>
+      <compteur @incremente="plusUn"></compteur>
+      <compteur @incremente="plusUn"></compteur>
+    </div>
+    <script>
+      app = Vue.createApp({
+        data() {
+          return {
+            total:0
+          }
+        },
+        methods: {
+          plusUn() {
+            this.total++;
+          }
+        }
+      });
+      app.component('compteur', {
+        data() {
+          return {
+            number:0
+          }
+        },
+        methods: {
+          ajouteUn() {
+            this.number++;
+            this.$emit('incremente')
+          }
+        },
+        template: '<button @click="ajouteUn">{{number}}</button >',
+          
+        
+      })
+      app.mount("#app");
+    </script>
+  </body>
+</html>
