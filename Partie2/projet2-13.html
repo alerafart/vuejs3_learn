@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projet2-13</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <!-- composant global 
+    $emit 
+    lorsq le button est cliqué un evenement personalisé est cree avec $ emit
+    evenement coucou est capture dans le composant et execute une function definie dans le parent -->
+    <div id="app">
+      <bienvenu @coucou="disBonjour"></bienvenu>
+    </div>
+    <script>
+      app = Vue.createApp({
+        methods: {
+          disBonjour() {
+            alert('le parent dis bonjour');
+          }
+        }
+      });
+      app.component('bienvenu', {
+        template: '<button @click="$emit(\'coucou\')">Cliquez ici </button >',
+        
+      })
+      app.mount("#app");
+    </script>
+  </body>
+</html>
