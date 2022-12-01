@@ -8,13 +8,27 @@
     <script src="https://unpkg.com/vue@next"></script>
 
 </head>
-<!-- -->
+<!-- watch 
+    observer counter
+quand il atteins 10 le remettre a 0 avec watch-->
 <body>
     <div id="app">
-
+        <button @click="num++">{{num}}</button>
     </div>
     <script>
         app= Vue.createApp({
+            data() {
+                return {
+                    num: 0
+                }
+            },
+            watch: {
+                num(valeur) {
+                    if(valeur === 10) {
+                        this.num = 0
+                    }
+                }
+            }
         });
 
         app.mount('#app');
