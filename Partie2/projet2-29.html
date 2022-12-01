@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet 2-29</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<!-- Challenge: ecouter la frappe dans un input avec un watcher.
+Pendant la frappe afficher message 'frappe en cours' et le faire disparaitre au bout de 3 segondes sans frappe -->
+<body>
+    <div id="app">
+        <input type="text" v-model="frappe" >{{message}}</input>
+    </div>
+    <script>
+        app= Vue.createApp({
+            data() {
+                return {
+                    frappe: '',
+                    message: ''
+                }
+            },
+             watch : {
+                frappe() {
+                    this.message= 'frape en cours'
+                        setTimeout(()=> {
+                            this.message= ''
+                        }, 3000)
+                }
+             }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
