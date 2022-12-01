@@ -4,27 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projet1-08</title>
+    <title>projet2-15</title>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </head>
-<!-- lifecycles hoot created -->
+<!-- lifecycles hook created 
+recuperation des users aleatoires depuis API externe-->
 <body>
     <div id="app">
+        <table>
+            <tr v-for="user in users">
+                <td >
+                    <img :src="user.picture.large" alt="">
+                </td>
+                <td>{{user.name.title}} {{user.name.first}} {{user.name.last}}
+                    <br>{{user.email}}
+                    <br>{{user.phone}}
+                </td>
+            </tr>
+        </table>
         
     </div>
     <script>
         app= Vue.createApp({
             data() {
                 return {
-                    
+                    users: []
                 }
             },
             created() {
-                axios.get('https://randomuser.me/api?results=3')
-                .then(function(response) {
-                    console.log(response.data.results)
+                axios.get('https://randomuser.me/api?results=3').then(function(response) {
+                    vm.users= response.data.results;
+                    // console.log(vm.users)
                 })
             }
         });
