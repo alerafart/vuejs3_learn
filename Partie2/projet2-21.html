@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projet2-21</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <!-- Slots nommés
+  v-slot = #  abregé-->
+  <body>
+    <div id="app">
+      <art titre="titre de l article">
+        <template v-slot:texte>
+          <p>texte de l article</p>
+        </template>
+        <p>ce texte est integré dans le slot default</p>
+      </art>
+    </div>
+    <script>
+      app = Vue.createApp({});
+      app.component("art", {
+        template: `<div>
+                        <h2>{{titre}}</h2>
+                            <slot name="texte">Texte par defaut</slot>
+                            <slot name="default"></slot>
+                       </div>`,
+        props: ["titre"],
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projet2-20</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <!-- Slots nommés
+quand composant n a rien dans son inner html il affiche la donnee par defaul
+quand il y a qqch dans slot il l affiche au lieu de truc par default-->
+  <body>
+    <div id="app">
+      <art titre="titre de l article">
+        <template v-slot:texte>
+          <p>texte de l article</p>
+        </template>
+      </art>
+    </div>
+    <script>
+      app = Vue.createApp({});
+      app.component("art", {
+        template: `<div>
+                        <h2>{{titre}}</h2>
+                            <slot name="texte">Texte par defaut</slot>
+                       </div>`,
+        props: ["titre"],
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

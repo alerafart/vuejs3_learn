@@ -4,27 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projet1-08</title>
+    <title>projet2-18</title>
     <script src="https://unpkg.com/vue@next"></script>
 
 </head>
+<!-- Slots simples 
+quand composant n a rien dans son inner html il affiche la donnee par defaul
+quand il y a qqch dans slot il l affiche au lieu de truc par default-->
 <body>
     <div id="app">
-        <p> {{  }}</p>
+        <test></test>
+        <test>Texte de remplacement</test>
     </div>
     <script>
         app= Vue.createApp({
-            data() {
-                return {
-                    
-                }
-            },
-            computed: {
-                calcul() {
-                    
-                }
-            }
         });
+        app.component('test', {
+            template: '<div><slot>Texte par defaut</slot></div>'
+        })
         app.mount('#app');
     </script>
 </body>
