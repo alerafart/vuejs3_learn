@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projet2-17</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <!-- lifecycles hook created 
+recuperation des users aleatoires depuis API externe
+Creer composant global appelé un q affiche nom photo le telephone et mail d un user
+
+Creer composant global appelé tous q'affiche 10 users via le composant 1 et un boucle v-for-->
+  <body>
+    <div id="app">
+      <tous :personnes="users"></tous>
+      <!-- 2- la directive v-bind donne acces au tableau users sous le nom personnes -->
+    </div>
+    <script>
+      app = Vue.createApp({
+        data() {
+          return {
+            users: []
+          }
+        },
+        //1 recup des utilisateurs stoches dans 5users°
+        // composant tous est utilisé dans l appli
+        created() {
+          axios
+            .get("https://randomuser.me/api?results=10")
+            .then(function (response) {
+              vm.users = response.data.results;
+            });
+        },
+      });
+      app.component('un', {
+        template: `<tr>
+                <td><img :src="unePersonne.picture.large"></td>
+                <td>{{unePersonne.name.first}} {{unePersonne.name.last}}
+                    <br>{{unePersonne.email}}
+                    <br>{{unePersonne.phone}}
+                </td>
+            </tr>`,
+          props: ['unePersonne']
+      });
+
+      app.component('tous', {
+        template: `<table v-for="person in personnes">
+                    <un :unePersonne="person"></un>
+                    </table>`,
+        props: ['personnes']
+      });
+      let vm = app.mount("#app");
+    </script>
+  </body>
+</html>
