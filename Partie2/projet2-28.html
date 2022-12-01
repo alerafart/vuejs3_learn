@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projet 2-27</title>
+    <title>projet 2-28</title>
     <script src="https://unpkg.com/vue@next"></script>
 
 </head>
 <!-- watch 
-    observer counter
-quand il atteins 10 le remettre a 0 avec watch-->
+    form avec zone text
+    watch on text
+    afficher alert lorsq 'ici' est tape dn zone de text-->
 <body>
     <div id="app">
-        {{num}}
-        <button @click="num++">INCREMENTER</button>
+        <textarea v-model="text" cols="30" rows="10">{{text}}</textarea>
     </div>
     <script>
         app= Vue.createApp({
             data() {
                 return {
-                    num: 0
+                    text: ''
                 }
             },
             watch: {
-                num(valeur) {
-                    if(valeur === 10) {
-                        this.num = 0
+                text(mot) {
+                    if(mot.includes('ici')) {
+                        alert('ici est ecrit')
                     }
                 }
             }
