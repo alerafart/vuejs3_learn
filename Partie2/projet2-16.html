@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projet2-16</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <!-- lifecycles hook created 
+recuperation des users aleatoires depuis API externe
+Creer composant local appelé un q affiche nom photo lelephone et mail d un user
+
+Creer composant local appelé tous q'affiche 10 users via le composant 1 et un boucle v-for-->
+  <body>
+    <div id="app">
+      <tous :personnes="users"></tous>
+    </div>
+    <script>
+      const Un = {
+        template: `<tr>
+                <td><img :src="unePersonne.picture.large"></td>
+                <td>{{unePersonne.name.first}} {{unePersonne.name.last}}
+                    <br>{{unePersonne.email}}
+                    <br>{{unePersonne.phone}}
+                </td>
+            </tr>`,
+        props: ['unePersonne'],
+      };
+    //   L'ordre des Composants est important!!!
+    // Si j'inverse Tous et Un l'appli ne marche pas !!!
+      const Tous = {
+        template: `<table v-for="person in personnes">
+                    <un :unePersonne="person"></un>
+                    </table>`,
+        components: {
+          'un': Un,
+        },
+        props: ['personnes'],
+      };
+      const app = Vue.createApp({
+        data() {
+          return {
+            users: []
+          }
+        },
+        created() {
+          axios
+            .get("https://randomuser.me/api?results=10")
+            .then(function (response) {
+              vm.users = response.data.results;
+            });
+        },
+        components: {
+          'tous': Tous
+        }
+      });
+      let vm = app.mount("#app");
+    </script>
+  </body>
+</html>
