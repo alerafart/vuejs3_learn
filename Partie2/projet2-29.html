@@ -9,7 +9,7 @@
 
 </head>
 <!-- Challenge: ecouter la frappe dans un input avec un watcher.
-Pendant la frappe afficher message 'frappe en cours' et le faire disparaitre au bout de 3 segondes sans frappe -->
+Pendant la frappe afficher message 'frappe en cours' et le faire disparaitre au bout de 3 segondes sans frappef -->
 <body>
     <div id="app">
         <input type="text" v-model="frappe" >{{message}}</input>
@@ -24,9 +24,9 @@ Pendant la frappe afficher message 'frappe en cours' et le faire disparaitre au 
             },
              watch : {
                 frappe() {
-                    this.message= 'frape en cours'
+                    this.message= 'frape en cours...'
                         setTimeout(()=> {
-                            this.message= ''
+                            this.message= '';
                         }, 3000)
                 }
              }
