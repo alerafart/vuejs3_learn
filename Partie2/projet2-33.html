@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>projet 2-33</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+      .t-enter-active,
+      .t-leave-active {
+        transition: opacity 1s ease-in;
+      }
+      .t-enter-from,
+      .t-leave-to {
+        opacity: 0;
+      }
+      h1 {
+        position: absolute;
+        top: 5rem;
+        left: 5rem;
+        font-size: 3rem;
+      }
+    </style>
+  </head>
+  <!-- Transitions d'entrée et sortie 
+  challenge : remplacer texte par un autre et suivantes entre 4 textes,lors de click du button en 1 segonde
+  -->
+  <body>
+    <div id="app">
+      <!-- element a animer v-if ou v-show-->
+      <button id="bouton" @click="anime<4?anime++:anime=1">Animer le text</button>
+      <br />
+      <transition name="t">
+        <h1 v-if="anime==1" key="t1">Texte 1</h1>
+        <h1 v-else-if="anime==2" key="t2">Texte 2</h1>
+        <h1 v-else-if="anime==3" key="t3">Texte 3</h1>
+        <h1 v-else="anime>3" key="t4">Texte 4</h1>
+      </transition>
+    </div>
+    <script>
+      app = Vue.createApp({
+        data() {
+          return {
+            anime:1
+          };
+        }
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

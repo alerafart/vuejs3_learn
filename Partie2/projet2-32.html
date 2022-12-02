@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>projet 2-31</title>
+    <title>projet 2-32</title>
     <script src="https://unpkg.com/vue@next"></script>
     <style>
       .t-enter-from,
@@ -13,30 +13,31 @@
       }
       .t-enter-active,
       .t-leave-active {
-        transition: opacity 5s ease-in;
+        transition: opacity 1s ease;
       }
     </style>
   </head>
-  <!-- Transitions d'entrée et sortie -->
+  <!-- Transitions succesives sur plusieurs elements
+  challenge : remplacer texte par un autre lors de click du button en 1 segonde
+  -->
   <body>
     <div id="app">
       <!-- element a animer v-if ou v-show-->
-        <button id="bouton" @click="visible=!visible">
-            <span v-if="visible">Cacher</span>
-            <span v-else>Afficher</span>
-        </button>
-        <br />
-        <transition name="t">
-            <div v-if="visible">
-                <img src="../Partie1/img.jpg" /> 
-            </div>
-        </transition>
+      <button id="bouton" @click="label=!label">
+        <span v-if="label">afficher text 2</span>
+        <span v-else>afficher text 1</span>
+      </button>
+      <br />
+      <transition name="t" in-out>
+        <p v-if="label" key="1">texte 1</p>
+        <p v-else key="2">texte 2</p>
+      </transition>
     </div>
     <script>
       app = Vue.createApp({
         data() {
           return {
-            visible: true,
+            label: true,
           };
         },
       });
