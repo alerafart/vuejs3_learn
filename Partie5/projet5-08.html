@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projet 5-07</title>
+    <title>projet 5-08</title>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://unpkg.com/vuex@4"></script>
 </head>
-<!-- Vuex et les formulaires-->
+<!-- Vuex et les formulaires
+    2eme technique avec getter et setter
+le getter
+le setter va efectuer un commit en passant par un mutateur dans le store-->
 <body>
     <div id="app">
-        <input type="text" @input="updateMessage">
+        <input type="text" v-model="message">
     </div>
     <script>
         const store = new Vuex.Store({
@@ -26,9 +29,14 @@
             }
         })
         app= Vue.createApp({
-            methods: {
-                updateMessage(event) {
-                    this.$store.commit('maj', event.target.value)
+            computed: {
+                message: {
+                    get() {
+                        return this.$store.state.message;
+                    },
+                    set(value) {
+                        this.$store.commit('maj', value);
+                    }
                 }
             }
         });
