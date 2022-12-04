@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet 5-03</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vuex@4"></script>
+</head>
+<!-- Vuex -->
+<body>
+    <div id="app">
+        Stock salades: {{stock}} <br>
+        <vente></vente>
+        <reapro></reapro>
+    </div>
+    <script>
+        
+        const store = new Vuex.Store({
+            state: {
+                stock: 20
+            },
+            mutations: {
+                uneVente(state) {
+                    state.stock--;
+                },
+                plusDix(state) {
+                    state.stock +=10;
+                }
+            }
+        });
+        const Vente = {
+            template: '<button @click="vente">vente</button>',
+            methods: {
+                vente() {
+                    console.log(store.state.stock);
+                    store.commit('uneVente');
+                    console.log(store.state.stock);
+                }
+            }
+        };
+        // je peux acceder au state avec ces 2 syntaxes
+        // store.state.stock
+        // this.$store.state.stock ou
+        const Reapro= {
+            template: '<button @click="reapro">reapro</button>',
+            methods: {
+                reapro() {
+                    console.log(this.$store.state.stock);
+                    store.commit('plusDix');
+                    console.log(this.$store.state.stock);
+                }
+            }
+        };
+        app= Vue.createApp({
+            components: {
+                vente : Vente,
+                reapro: Reapro
+            },
+            computed: {
+                stock() {
+                    return store.state.stock;
+                }
+            }
+        });
+        app.use(store);
+        app.mount('#app');
+    </script>
+</body>
+</html>
