@@ -33,8 +33,7 @@
             template: '<button @click="reapro">reapro</button>',
             methods: {
                 reapro() {
-                    state.stock+=20;
-
+                    state.stock+=10;
                 }
             }
         };
@@ -45,14 +44,10 @@
                 reapro: Reapro
             },
             computed: {
-                // stock() {
-                //     return store.state.stock;
-                // }
                 etat() {
                     return { state }
                 }
             }
-        });
 
         app.mount('#app');
     </script>
