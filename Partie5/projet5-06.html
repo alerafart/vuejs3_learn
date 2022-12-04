@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet 5-06</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vuex@4"></script>
+</head>
+<!--challenge: remplacer store par un etat reactive -->
+<body>
+    <div id="app">
+        Stock salades: {{etat.state.stock}} <br>
+        <vente></vente>
+        <reapro></reapro>
+    </div>
+    <script>
+        let state = Vue.reactive({
+            stock: 20
+        });
+
+        const Vente = {
+            template: '<button @click="vente">vente</button>',
+            methods: {
+                vente() {
+                    state.stock--;
+                }
+            }
+        };
+        
+        const Reapro= {
+            template: '<button @click="reapro">reapro</button>',
+            methods: {
+                reapro() {
+                    state.stock+=20;
+
+                }
+            }
+        };
+
+        app= Vue.createApp({
+            components: {
+                vente : Vente,
+                reapro: Reapro
+            },
+            computed: {
+                // stock() {
+                //     return store.state.stock;
+                // }
+                etat() {
+                    return { state }
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>

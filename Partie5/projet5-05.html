@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet 5-05</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<!-- Alternative a Vuex Reactive-->
+<body>
+    <div id="app">
+        <button @click="plusUn">Test reactive</button>
+        <p>{{etat.state.count}}</p>
+    </div>
+    <script>
+        // store 'minimaliste' defini dans la variable state
+        let state = Vue.reactive({
+            count: 0
+        });
+
+        app= Vue.createApp({
+            computed: {
+                etat() {
+                    return { state }
+                }
+            },
+            methods: {
+                plusUn() {
+                    state.count++
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
