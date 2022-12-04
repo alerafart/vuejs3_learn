@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet 4-04</title>
+    <title>Projet 4-06</title>
     <script src="https://unpkg.com/vue@next"></script>
 </head>
 
@@ -16,11 +16,12 @@
         <titre niveau="3">Titre de niveau 3</titre>
     </div>
     <script>
-        const Titre = {
-            render() {
-                return h('h' + this.niveau, {}, this.$slots.default());
-            },
-            props: ['niveau']            
+        const Titre = (props, context) => {
+            return h('h'+ props.niveau, {
+                onClick: (event) => {
+                    console.log(event);
+                } 
+        }, context.slots);           
         }
         const {h} = Vue;
         const app = Vue.createApp({
