@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet 5-09</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vuex@4"></script>
+</head>
+<!-- Vuex et les formulaires
+    verif avec erreurs
+    Validation de formulaire -->
+<body>
+    <div id="app">
+        <p v-if="errors.length"> Une ou plusieurs erreurs detectés</p>
+        <ul>
+            <li v-for="error in errors">{{error}}</li>
+        </ul>
+        
+        <form action="https://www.bing.com" v-on:submit="verif" method="post">
+
+            <label for="nom">Nom</label>
+            <input type="text" name="nom" v-model="nom"> <br>
+
+            <label for="mail">email</label>
+            <input type="text" name="mail" v-model="mail"><br>
+
+            <input type="submit" value="envoyer"></input>
+        </form>
+    </div>
+
+    <script>
+        app= Vue.createApp({
+            data() {
+                return {
+                    nom: '',
+                    mail: '',
+                    errors: []
+                }
+            },
+            methods: {
+                valide(mail) {
+                    var ex = new RegExp(/^[a-z0-9.-]+@[a-z0-9._-]{2,}\.[a-z]{2,8}$/);
+                    return ex.test(mail);
+                },
+                verif(event) {
+                    this.errors = [];
+                    if(!this.nom) {
+                        this.errors.push('Le nom est obligatoire');
+                    }
+                    if(!this.mail) {
+                        this.errors.push('Le mail est obligatoire');
+                    } else if(!this.valide(this.mail)){
+                        this.errors.push('mail est pas bien formé')
+                    }
+                    if(this.errors.length == 0) {
+                        return true;
+                    } else {
+                        event.preventDefault();
+                        return false;
+                    }
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>
