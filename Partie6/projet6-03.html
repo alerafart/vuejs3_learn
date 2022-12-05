@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet 6-03</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vuex@4"></script>
+</head>
+<!-- Mixins Global
+    pas conseille d'utiliser des Mixins globaux car 
+    ils affectent toutes les instances de vue y comprises celles des bibliotheques tierces -->
+<body>
+    <div id="app">
+
+    </div>
+    <script>
+        app= Vue.createApp({
+        });
+        
+        app.mixin({
+            created() {
+                this.bonjour();
+            },
+            methods: {
+                bonjour() {
+                    console.log('le mixing Global dit bonjour');
+                }
+            }
+        })
+        app.mount('#app');
+    </script>
+</body>
+</html>
