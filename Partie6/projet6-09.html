@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet 6-09</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<!-- directives Personalisées avec plusieurs arguments dans 1 json-->
+<body>
+    <div id="app">
+        <div v-hcouleur="{titre:1, couleur:'lightblue', texte:'un titre h1 sousligne en lightblue'}"></div>
+        <div v-hcouleur="{titre:3, couleur:'lightgreen', texte:'un titre h3 sousligne en lightgreen'}"></div>
+
+    </div>
+    <script>
+        app= Vue.createApp({
+            
+        });
+        
+        app.directive('hcouleur', {
+            beforeMount(el, binding) {
+                el.innerHTML = '<h' + binding.value.titre +'>'
+                + binding.value.texte
+                + '</h' + binding.value.titre + '>';
+                el.style.background = binding.value.couleur;
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
