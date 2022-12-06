@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet 7-01</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <!--  Composant Teleport deplacer ou teleporter des elements ou portion de composant ailleurs dans la page -->
+    <div id="app">
+        <bonjour></bonjour>
+    </div>
+    <script>
+        const app = Vue.createApp({
+        
+        });
+        app.component("bonjour", {
+            template: `<p>Un premier paragraphe</p>
+                        <teleport to="body" :disabled="deplace">
+                        <p>Un 2eme paragraphe</p>
+                        </teleport>
+                        <button @click="deplace=!deplace">Change</button>`,
+                        data() {
+                            return {
+                                deplace:true
+                            }
+                        }
+        });
+        app.mount('#app');
+    </script>
+</body>
+
+</html>
